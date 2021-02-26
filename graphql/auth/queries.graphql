@@ -1,0 +1,12 @@
+extend type Query {
+    "Проверка на доступность email для регистрации"
+    authCheckEmail(email: String!): Boolean @field(resolver: "AuthController@checkEmail")
+
+    "Проверка токена"
+    authCheckToken: Boolean @field(resolver: "AuthController@checkToken")
+}
+
+extend type Query @guard {
+    "Получить данные авторизированного пользователя"
+    me: User @auth
+}
