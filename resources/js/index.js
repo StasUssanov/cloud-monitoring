@@ -1,9 +1,16 @@
 require('./bootstrap');
 
 import ReactDOM from 'react-dom';
+
+import { ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
+import theme from './theme';
+
 import App from './App';
 
-const el = document.getElementById('app');
-if (el) {
-    ReactDOM.render(<App/>, el);
-}
+ReactDOM.render(
+    <ThemeProvider theme={theme}>
+        <CssBaseline/>
+        <App/>
+    </ThemeProvider>
+    , document.getElementById('app'));

@@ -12,5 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/index.js', 'public/js').react();
+
+mix.sass('resources/scss/fonts/comfortaa/comfortaa.scss', 'public/css');
+mix.sass('resources/scss/fonts/material-icons/material-icons.scss', 'public/css');
+
 mix.disableSuccessNotifications();
 if (mix.inProduction()) mix.version();
