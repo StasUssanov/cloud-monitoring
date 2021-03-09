@@ -1,7 +1,15 @@
 import { all, call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
-import { APP_INIT, MESSAGE_HIDE, MESSAGE_SHOW, messageSetList, messageShow } from './actions';
+import {
+    APP_INIT,
+    MESSAGE_HIDE,
+    MESSAGE_SHOW,
+    messageSetList,
+    messageShow,
+    ZABBIX_REQUEST_DATA,
+    zabbixSetData
+} from './actions';
 import { authLogin } from '../auth/actions';
-import { queryInitData } from '../../queries/app';
+import { queryInitData, queryZabbix } from '../../queries/app';
 import { getMessages } from './selectors';
 import { token } from '../auth/selectors';
 
@@ -37,6 +45,14 @@ function* workerRemoveMessage({ payload }) {
     yield put(messageSetList(newMessages));
 }
 
+function* workerZabbixGetData() {
+    const { zabbix } = yield call(queryZabbix);
+
+    console.log(zabbix);
+
+    yield put(zabbixSetData(zabbix));
+}
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Watchers ~~~ */
 
 export function* watchAppInit() {
@@ -51,10 +67,15 @@ export function* watchRemoveMessage() {
     yield takeEvery(MESSAGE_HIDE, workerRemoveMessage);
 }
 
+export function* watchZabbixGetData() {
+    yield takeEvery(ZABBIX_REQUEST_DATA, workerZabbixGetData);
+}
+
 export default function* () {
     yield all([
         watchAppInit(),
         watchPutMessage(),
         watchRemoveMessage(),
+        watchZabbixGetData(),
     ])
 }

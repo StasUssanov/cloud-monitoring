@@ -1,8 +1,9 @@
-import { LOADER_TOGGLE, MESSAGE_SET_LIST } from './actions';
+import { LOADER_TOGGLE, MESSAGE_SET_LIST, ZABBIX_SET_DATA } from './actions';
 
 const initialState = {
     isLoading: false,
     messages: [],
+    zabbixItems: [],
 }
 
 export default (state = initialState, action) => {
@@ -12,6 +13,9 @@ export default (state = initialState, action) => {
 
         case MESSAGE_SET_LIST:
             return { ...state, messages: action.payload };
+
+        case ZABBIX_SET_DATA:
+            return { ...state, zabbixItems: action.payload };
 
         default:
             return state;

@@ -13,3 +13,16 @@ export function queryInitData() {
         .then(data => data)
         .catch(error => console.error('queryInitData', error));
 }
+
+export function queryZabbix() {
+    const query = gql`query {
+        zabbix {
+            itemid
+            lastclock
+            lastvalue
+        }
+    }`;
+    return client().request(query)
+        .then(data => data)
+        .catch(error => console.error('queryZabbix', error));
+}

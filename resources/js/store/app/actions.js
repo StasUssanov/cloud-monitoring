@@ -7,6 +7,9 @@ export const MESSAGE_SHOW = 'MESSAGE_SHOW';
 export const MESSAGE_HIDE = 'MESSAGE_HIDE';
 export const MESSAGE_SET_LIST = 'MESSAGE_SET_LIST';
 
+export const ZABBIX_REQUEST_DATA = 'ZABBIX_REQUEST_DATA';
+export const ZABBIX_SET_DATA = 'ZABBIX_SET_DATA';
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ActionsCreator ~~~ */
 
 export const appInit = () => ({
@@ -31,4 +34,13 @@ export const messageHide = ({ id }) => ({
 export const messageSetList = payload => ({
     type: MESSAGE_SET_LIST,
     payload: payload,
+});
+
+export const zabbixRequestData = () => ({
+    type: ZABBIX_REQUEST_DATA,
+});
+
+export const zabbixSetData = payload => ({
+    type: ZABBIX_SET_DATA,
+    payload
 });
